@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IT Career Explorer</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Playbook interaktif gratis dari Ngawam Digital untuk mengenal dunia kerja IT dan menemukan role yang ingin kamu eksplorasi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<style>
+/* Layout: satu "rute" berisi 5 perhentian. Satu perhentian per layar, rel progres di atas, tombol maju-mundur di bawah. */
+:root{
+  /* ===== WARNA BRAND NGAWAM DIGITAL (edit di sini) =====
+     Diambil dari logo: navy latar, teal-hijau simbol N, cyan tulisan "Ngawam". Gold untuk tombol utama. */
+  --navy:#062B45;        /* navy logo */
+  --gold:#E3A934;        /* aksen gold */
+  --teal:#13A8B6;        /* teal simbol N */
+  --green:#22C59A;       /* hijau ujung simbol N */
+  --cyan:#00C4CC;        /* cyan tulisan Ngawam */
+  --grad:linear-gradient(135deg,#13A8B6 0%,#22C59A 100%);
+
+  --bg:#F6F8FA; --card:#FFFFFF; --ink:#16263A; --ink-2:#4D5D6E; --line:#DCE3EA;
+  --heading:#062B45; --hero:#062B45; --hero-ink:#FFFFFF; --hero-ink-2:#BFD2E2;
+  --btn:#062B45; --btn-ink:#FFFFFF; --accent:#0A8189; --accent-soft:#E0F4F3;
+  --gold-soft:#FBF1DA; --gold-ink:#7E5300; --ok:#1C8A5A; --ok-soft:#E2F3EA;
+  --bar:rgba(246,248,250,.94); --shadow:0 1px 2px rgba(14,42,71,.06),0 8px 24px rgba(14,42,71,.07);
+  --f-display:'Plus Jakarta Sans','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-body:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#051B2C; --card:#0B2638; --ink:#E6EDF4; --ink-2:#A5B4C3; --line:#1D3D54;
+    --heading:#F3F6F9; --hero:#062B45; --hero-ink:#FFFFFF; --hero-ink-2:#B6C9DA;
+    --btn:#E3A934; --btn-ink:#062B45; --accent:#2FD0C4; --accent-soft:#0F3133;
+    --gold-soft:#2C2411; --gold-ink:#F2C766; --ok:#4CC38A; --ok-soft:#12301F;
+    --bar:rgba(5,27,44,.94); --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#051B2C; --card:#0B2638; --ink:#E6EDF4; --ink-2:#A5B4C3; --line:#1D3D54;
+  --heading:#F3F6F9; --hero:#062B45; --hero-ink:#FFFFFF; --hero-ink-2:#B6C9DA;
+  --btn:#E3A934; --btn-ink:#062B45; --accent:#2FD0C4; --accent-soft:#0F3133;
+  --gold-soft:#2C2411; --gold-ink:#F2C766; --ok:#4CC38A; --ok-soft:#12301F;
+  --bar:rgba(5,27,44,.94); --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25); color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 80px)}
+body{margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 var(--f-body); -webkit-font-smoothing:antialiased}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:30; background:var(--bar)}
+img{max-width:100%}
+h1,h2,h3,h4{font-family:var(--f-display); color:var(--heading); margin:0; text-wrap:balance; letter-spacing:-.01em}
+p{margin:0}
+a{color:var(--accent)}
+button{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:6px}
+.wrap{max-width:820px; margin:0 auto; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ===== Top bar ===== */
+.bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:var(--bar); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex; align-items:center; gap:14px; padding-block:10px}
+.brand{display:flex; align-items:center; gap:8px; font:800 15px/1 var(--f-display); color:var(--heading); text-decoration:none; white-space:nowrap}
+.brand-logo{height:26px; width:auto; display:block}
+.brand-mark{width:26px; height:26px; border-radius:7px; background:var(--grad); color:#fff; display:grid; place-items:center; font:800 14px/1 var(--f-display)}
+.route{flex:1; display:flex; align-items:center; min-width:0; max-width:300px; margin-left:auto}
+.route i{flex:1; height:3px; background:var(--line); border-radius:2px}
+.route i.on{background:var(--teal)}
+.route b{width:12px; height:12px; border-radius:50%; border:2px solid var(--line); background:var(--card); flex:none}
+.route b.done{background:var(--grad); border-color:transparent}
+.route b.here{border-color:var(--gold); box-shadow:0 0 0 3px var(--gold-soft)}
+.prog-txt{font-size:13px; color:var(--ink-2); white-space:nowrap; font-variant-numeric:tabular-nums}
+.menu-btn{border:1px solid var(--line); background:var(--card); border-radius:999px; padding:7px 13px; font-size:13px; font-weight:600; cursor:pointer}
+.menu{position:absolute; right:max(16px,env(safe-area-inset-right,0px)); top:100%; margin-top:6px; width:min(330px,calc(100vw - 32px)); background:var(--card); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow); padding:8px}
+.menu a{display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; text-decoration:none; color:var(--ink); font-size:15px}
+.menu a:hover{background:var(--accent-soft)}
+.menu .n{width:24px; height:24px; border-radius:50%; display:grid; place-items:center; font-size:12px; font-weight:700; background:var(--bg); border:1.5px solid var(--line); flex:none}
+.menu .done .n{background:var(--accent); border-color:var(--accent); color:#fff}
+.menu .cur{font-weight:700}
+.menu hr{border:0; border-top:1px solid var(--line); margin:6px 4px}
+@media (max-width:560px){ .route{display:none} .bar .wrap{gap:10px} .prog-txt{margin-left:auto} }
+
+/* ===== Views ===== */
+main{padding-block:28px 64px}
+.view{display:grid; gap:22px}
+.eyebrow{font-size:13px; font-weight:700; color:var(--accent); letter-spacing:.04em; text-transform:uppercase}
+.view-head{display:grid; gap:8px}
+.view-head h2{font-size:clamp(28px,5vw,38px); line-height:1.12}
+.lede{font-size:18px; color:var(--ink-2); max-width:62ch}
+.prose{display:grid; gap:12px; max-width:65ch}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:20px}
+.note{background:var(--gold-soft); border-radius:var(--r); padding:14px 18px; font-size:15px}
+.note b{color:var(--gold-ink)}
+.time{display:inline-flex; gap:6px; align-items:center; font-size:13px; color:var(--ink-2)}
+
+/* ===== Landing ===== */
+.hero{background:var(--hero); color:var(--hero-ink)}
+.hero .wrap{padding-block:44px 40px; display:grid; grid-template-columns:1fr auto; gap:18px 32px; align-items:center}
+.hero-text{display:grid; gap:18px; min-width:0}
+.hero-logo{width:190px; height:auto; display:block}
+.hero-logo-fallback{font:800 28px/1.1 var(--f-display); color:var(--cyan)}
+@media (max-width:700px){ .hero .wrap{grid-template-columns:1fr} .hero-brand{order:-1} .hero-logo{width:112px} }
+.hero .kicker{font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold)}
+.hero h1 em{font-style:normal; color:var(--cyan)}
+.hero h1{color:var(--hero-ink); font-size:clamp(38px,8vw,64px); line-height:1.02; letter-spacing:-.03em}
+.hero .tag{font-size:clamp(18px,2.6vw,21px); color:var(--hero-ink-2); max-width:34ch; line-height:1.45}
+.meta{display:flex; flex-wrap:wrap; gap:8px}
+.meta span{border:1px solid rgba(255,255,255,.25); border-radius:999px; padding:6px 12px; font-size:13.5px; color:var(--hero-ink)}
+.hero-cta{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; border:0; border-radius:999px; padding:13px 22px; font-weight:700; font-size:15.5px; cursor:pointer; text-decoration:none; background:var(--btn); color:var(--btn-ink)}
+.btn.gold{background:var(--gold); color:#0E2A47}
+.btn.ghost{background:transparent; color:var(--ink); border:1.5px solid var(--line)}
+.btn.small{padding:9px 15px; font-size:14px}
+.btn[disabled]{opacity:.5; cursor:not-allowed}
+.hero .btn.ghost{color:var(--hero-ink); border-color:rgba(255,255,255,.35)}
+.stops{display:grid; gap:0; counter-reset:s}
+.stop-row{display:grid; grid-template-columns:36px 1fr auto; gap:14px; align-items:start; padding:14px 0; border-top:1px solid var(--line); text-decoration:none; color:var(--ink)}
+.stop-row:last-child{border-bottom:1px solid var(--line)}
+.stop-row .n{width:32px; height:32px; border-radius:50%; border:2px solid var(--accent); display:grid; place-items:center; font:700 14px/1 var(--f-display); color:var(--accent)}
+.stop-row.done .n{background:var(--grad); border-color:transparent; color:#fff}
+.stop-row h3{font-size:17px}
+.stop-row p{font-size:14.5px; color:var(--ink-2); margin-top:2px}
+.stop-row .min{font-size:13px; color:var(--ink-2); white-space:nowrap; padding-top:6px; font-variant-numeric:tabular-nums}
+.stop-row:hover h3{color:var(--accent)}
+
+/* ===== Nav buttons ===== */
+.pager{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; padding-top:8px; border-top:1px solid var(--line); margin-top:8px}
+.pager .btn{min-width:130px}
+
+/* ===== Stop 1: flow ===== */
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.flow .st{background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:10px 12px; min-width:0; flex:1 1 110px; text-align:center}
+.flow .st b{display:block; font:700 15px/1.2 var(--f-display); color:var(--heading)}
+.flow .st span{font-size:12.5px; color:var(--ink-2)}
+.flow .ar{color:var(--accent); font-weight:700}
+.flow .st.release{background:var(--gold-soft); border-color:var(--gold)}
+.loop{font-size:13.5px; color:var(--ink-2); display:flex; gap:8px; align-items:center}
+.who{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+.who div{border-radius:12px; padding:12px 14px; background:var(--card); border:1px solid var(--line); font-size:14.5px}
+.who b{display:block; font-family:var(--f-display); color:var(--heading)}
+.who .code{color:var(--gold-ink); font-weight:600; font-size:12.5px}
+@media (max-width:600px){ .who{grid-template-columns:1fr 1fr} .flow .ar{display:none} .flow .st{flex-basis:calc(50% - 6px)} }
+
+/* ===== Stop 2: role cards ===== */
+.roles{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:640px){ .roles{grid-template-columns:1fr} }
+.role{background:var(--card); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+.role summary{list-style:none; cursor:pointer; padding:16px 18px; display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center}
+.role summary::-webkit-details-marker{display:none}
+.ic{width:40px; height:40px; border-radius:11px; background:var(--accent-soft); display:grid; place-items:center; flex:none}
+.ic svg{width:22px; height:22px; stroke:var(--accent); fill:none; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round}
+.role h3{font-size:17px}
+.role .one{font-size:14px; color:var(--ink-2); margin-top:2px; line-height:1.45}
+.chev{width:22px; height:22px; transition:transform .2s; stroke:var(--ink-2); fill:none; stroke-width:2}
+.role[open] .chev{transform:rotate(180deg)}
+.role[open]{border-color:var(--accent)}
+.role .body{padding:0 18px 18px; display:grid; gap:12px}
+.kv{display:grid; gap:2px}
+.kv dt{font-size:12.5px; font-weight:700; color:var(--ink-2); letter-spacing:.03em; text-transform:uppercase}
+.kv dd{margin:0; font-size:15px}
+.pill{display:inline-block; font-size:12.5px; font-weight:700; padding:3px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent)}
+.pill.yes{background:var(--gold-soft); color:var(--gold-ink)}
+
+/* ===== Stop 3: explorer ===== */
+.q{display:grid; gap:10px}
+.q legend{font:700 17px/1.35 var(--f-display); color:var(--heading); padding:0; margin-bottom:8px}
+.q fieldset{border:0; margin:0; padding:0; min-width:0}
+.q .qn{font-size:12.5px; color:var(--ink-2); font-weight:600; margin-bottom:2px}
+.opts{display:grid; grid-template-columns:1fr 1fr; gap:8px}
+@media (max-width:600px){ .opts{grid-template-columns:1fr} }
+.opt{position:relative; display:flex; gap:10px; align-items:flex-start; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px; background:var(--card); cursor:pointer; font-size:15px; line-height:1.4}
+.opt input{position:absolute; opacity:0; pointer-events:none}
+.opt .dot{width:18px; height:18px; border-radius:50%; border:2px solid var(--line); flex:none; margin-top:1px; display:grid; place-items:center}
+.opt:hover{border-color:var(--accent)}
+.opt:has(input:checked){border-color:var(--accent); background:var(--accent-soft)}
+.opt:has(input:checked) .dot{border-color:var(--accent); background:var(--accent); box-shadow:inset 0 0 0 3px var(--card)}
+.opt:has(input:focus-visible){outline:3px solid var(--gold); outline-offset:2px}
+.answered{font-size:14px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+.result{border:2px solid var(--teal); border-radius:var(--r); background:var(--card); padding:20px; display:grid; gap:16px}
+.result h3{font-size:22px}
+.pick{display:grid; grid-template-columns:auto 1fr; gap:12px; padding-top:14px; border-top:1px solid var(--line)}
+.pick:first-of-type{border-top:0; padding-top:0}
+.pick h4{font-size:18px; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.pick .sc{font:600 12.5px/1 var(--f-body); color:var(--ink-2); background:var(--bg); border:1px solid var(--line); border-radius:999px; padding:4px 9px}
+.pick ul{margin:6px 0 8px; padding-left:18px; font-size:14.5px; color:var(--ink-2)}
+.pick li{margin:2px 0}
+.linkbtn{background:none; border:0; padding:0; color:var(--accent); font-weight:600; cursor:pointer; text-decoration:underline; text-underline-offset:3px; font-size:14.5px}
+
+/* ===== Stop 4: simulation (lingkaran kolaborasi) ===== */
+.sim{display:grid; grid-template-columns:minmax(0,380px) 1fr; gap:18px; align-items:start}
+@media (max-width:760px){ .sim{grid-template-columns:1fr} }
+.cycle{width:100%; max-width:380px; height:auto; display:block; margin-inline:auto}
+.cycle .arc{fill:none; stroke:var(--teal); stroke-width:2.5}
+.cycle .arc-lbl{font:600 11px var(--f-body); fill:var(--ink-2)}
+.cycle .node circle{fill:var(--card); stroke:var(--line); stroke-width:2}
+.cycle .node text{font:700 13px var(--f-display); fill:var(--heading); text-anchor:middle; pointer-events:none}
+.cycle .node.btn-node{cursor:pointer}
+.cycle .node.btn-node:hover circle{stroke:var(--teal)}
+.cycle .node.seen circle{stroke:var(--teal)}
+.cycle .node.sel circle{fill:url(#ngGrad); stroke:none}
+.cycle .node.sel text{fill:#fff}
+.cycle .node.user circle{fill:var(--gold-soft); stroke:var(--gold)}
+.cycle .node.user text{fill:var(--gold-ink)}
+.cycle .node.pm circle{stroke-dasharray:5 4}
+.cycle .node:focus{outline:none}
+.cycle .node:focus-visible circle{stroke:var(--gold); stroke-width:3.5}
+.cycle .spoke{stroke:var(--line); stroke-width:1.5; stroke-dasharray:3 5}
+.iter{display:grid; gap:10px; background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px 20px}
+.iter h3{font-size:18px}
+.iter ul{margin:0; padding:0; list-style:none; display:grid; gap:8px}
+.iter li{display:grid; grid-template-columns:auto 1fr; gap:10px; font-size:15px}
+.iter li::before{content:"↺"; color:var(--teal); font-weight:700}
+.panel{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:20px; display:grid; gap:14px; min-width:0}
+.panel .role-tag{display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:var(--accent); background:var(--accent-soft); border-radius:999px; padding:5px 11px; justify-self:start}
+.panel h3{font-size:21px}
+.artifact{background:var(--bg); border:1px dashed var(--line); border-radius:12px; padding:14px 16px; font-size:14.5px}
+.artifact .lbl{font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--gold-ink); margin-bottom:6px}
+.artifact ul{margin:4px 0 0; padding-left:18px}
+.pm-lane{display:flex; gap:12px; align-items:flex-start; background:var(--gold-soft); border-radius:12px; padding:12px 14px; font-size:14.5px}
+.pm-lane b{color:var(--gold-ink); white-space:nowrap}
+.mock{display:flex; align-items:center; gap:0; margin-top:6px}
+.mock span{font-size:12px; font-weight:600; color:var(--ink-2); text-align:center; flex:1}
+.mock-line{display:flex; align-items:center; margin:6px 6px 4px}
+.mock-line i{flex:1; height:3px; background:var(--accent)}
+.mock-line i.off{background:var(--line)}
+.mock-line b{width:14px; height:14px; border-radius:50%; background:var(--accent); flex:none}
+.mock-line b.off{background:var(--line)}
+.sim-nav{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap}
+#simCount{flex-basis:100%; order:-1}
+.bonus-card{display:grid; grid-template-columns:1fr auto; gap:12px 18px; align-items:center; border:2px dashed var(--teal); border-radius:var(--r); padding:18px 20px; background:var(--card)}
+.bonus-card .eyebrow{color:var(--gold-ink)}
+.bonus-card h3{font-size:18px; margin-top:2px}
+.bonus-card p{font-size:14.5px; color:var(--ink-2); margin-top:4px}
+@media (max-width:600px){ .bonus-card{grid-template-columns:1fr} }
+
+/* ===== Stop 5 ===== */
+.tabs{display:flex; flex-wrap:wrap; gap:6px}
+.tabs button{border:1.5px solid var(--line); background:var(--card); border-radius:999px; padding:7px 13px; font-size:14px; font-weight:600; cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--btn); border-color:var(--btn); color:var(--btn-ink)}
+.skills{display:grid; gap:10px; counter-reset:k}
+.skill{display:grid; grid-template-columns:34px 1fr; gap:12px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px}
+.skill::before{counter-increment:k; content:counter(k); width:30px; height:30px; border-radius:50%; background:var(--gold-soft); color:var(--gold-ink); display:grid; place-items:center; font:800 14px/1 var(--f-display)}
+.skill b{display:block; font-family:var(--f-display); color:var(--heading); font-size:16px}
+.skill span{font-size:14.5px; color:var(--ink-2)}
+.days{display:grid; gap:8px}
+.day{display:grid; grid-template-columns:auto 1fr auto; gap:14px; align-items:start; background:var(--card); border:1.5px solid var(--line); border-radius:12px; padding:14px 16px; cursor:pointer}
+.day input{appearance:none; -webkit-appearance:none; width:24px; height:24px; margin:2px 0 0; border:2px solid var(--accent); border-radius:7px; display:grid; place-items:center; cursor:pointer; background:var(--card)}
+.day input::after{content:""; width:11px; height:6px; border:solid #fff; border-width:0 0 2.5px 2.5px; transform:rotate(-45deg) translate(1px,-1px); opacity:0}
+.day input:checked{background:var(--ok); border-color:var(--ok)}
+.day input:checked::after{opacity:1}
+.day:has(input:checked){border-color:var(--ok); background:var(--ok-soft)}
+.day h4{font-size:16px}
+.day h4 small{font:700 12px/1 var(--f-body); color:var(--accent); letter-spacing:.04em; text-transform:uppercase; display:block; margin-bottom:4px}
+.day p{font-size:14.5px; color:var(--ink-2); margin-top:3px}
+.day .goal{color:var(--ink)}
+.day .min{font-size:13px; color:var(--ink-2); white-space:nowrap; font-variant-numeric:tabular-nums}
+.meter{height:8px; background:var(--line); border-radius:8px; overflow:hidden}
+.meter span{display:block; height:100%; background:var(--ok); width:0; transition:width .3s}
+.cta-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:640px){ .cta-grid{grid-template-columns:1fr} }
+.cta{display:grid; gap:8px; align-content:start; background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px}
+.cta h4{font-size:17px}
+.cta p{font-size:14.5px; color:var(--ink-2)}
+.cta .btn{justify-self:start; margin-top:4px}
+.cta.main{border:2px solid var(--gold); background:var(--gold-soft)}
+.cta .by{font-size:12.5px; font-weight:700; color:var(--gold-ink); letter-spacing:.03em; text-transform:uppercase}
+.finish{display:grid; grid-template-columns:auto 1fr; gap:10px 18px; align-items:center; background:var(--hero); color:var(--hero-ink); border-radius:var(--r); padding:22px}
+.finish > div{display:grid; gap:8px; justify-items:start}
+.finish img{width:44px; height:auto}
+@media (max-width:520px){ .finish{grid-template-columns:1fr} }
+.finish h3{color:var(--hero-ink)}
+.finish p{color:var(--hero-ink-2)}
+.reset-row{display:flex; flex-wrap:wrap; gap:10px; align-items:center; font-size:14.5px; color:var(--ink-2)}
+footer{border-top:1px solid var(--line); font-size:13px; color:var(--ink-2)}
+footer .wrap{padding-block:20px 28px}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; scroll-behavior:auto!important} }
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap" style="position:relative">
+    <a class="brand" href="#mulai" aria-label="Ngawam Digital, kembali ke awal">
+      <!-- LOGO KECIL: ganti file assets/logo-mark.png (simbol saja, latar transparan) -->
+      <img class="brand-logo" src="assets/logo-mark.png" alt="" data-logo width="19" height="26">
+      <span class="brand-mark" aria-hidden="true" data-logo-fallback hidden>N</span>
+      <span id="brandName">Ngawam Digital</span></a>
+    <div class="route" id="route" aria-hidden="true"></div>
+    <span class="prog-txt" id="progTxt">0 dari 5 bagian</span>
+    <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">Isi</button>
+    <nav class="menu" id="menu" hidden aria-label="Daftar bagian"></nav>
+  </div>
+</header>
+
+<!-- ============ LANDING ============ -->
+<section data-view="mulai" id="v-mulai">
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <p class="kicker">Playbook interaktif · Gratis</p>
+        <h1>IT Career <em>Explorer</em></h1>
+        <p class="tag">Kenali dunia IT, temukan role yang cocok untuk dieksplorasi, dan mulai perjalanan kariermu.</p>
+        <div class="meta"><span>± 10 menit</span><span>5 bagian singkat</span><span>Tanpa login</span><span>Tanpa coding</span></div>
+        <div class="hero-cta">
+          <a class="btn gold" id="startBtn" href="#dunia-it">Mulai Eksplorasi</a>
+          <a class="btn ghost" id="resumeBtn" href="#dunia-it" hidden>Lanjutkan</a>
+        </div>
+      </div>
+      <div class="hero-brand">
+        <!-- LOGO UTAMA: ganti file assets/logo-ngawam.png (latar transparan) -->
+        <img class="hero-logo" src="assets/logo-ngawam.png" alt="Ngawam Digital" data-logo width="190" height="183">
+        <span class="hero-logo-fallback" data-logo-fallback hidden>Ngawam Digital</span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap" style="padding-block:28px 0; display:grid; gap:16px">
+    <p class="lede">Kerja di IT nggak selalu berarti jadi programmer. Di sini kamu kenalan dengan enam role di tim software, menjawab kuis singkat, lalu pulang membawa satu langkah kecil untuk dicoba.</p>
+    <div class="stops" id="preview"></div>
+    <p style="font-size:14px; color:var(--ink-2)">Progresmu tersimpan otomatis di browser ini, jadi kamu bisa berhenti dan lanjut kapan saja.</p>
+  </div>
+</section>
+
+<main class="wrap">
+<!-- ============ 1. DUNIA IT ============ -->
+<section class="view" data-view="dunia-it" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Bagian 1 dari 5</p>
+    <h2 tabindex="-1">Dunia IT dalam 2 menit</h2>
+    <p class="lede">Setiap aplikasi yang kamu pakai, dari ojek online sampai mobile banking, dibuat oleh satu tim. Isinya bukan cuma programmer.</p>
+  </div>
+  <div class="flow" role="img" aria-label="Alur: ide, rencana, desain, bangun, uji, rilis, lalu masukan pengguna jadi ide berikutnya">
+    <div class="st"><b>Ide</b><span>ada masalah</span></div><span class="ar" aria-hidden="true">→</span>
+    <div class="st"><b>Rencana</b><span>apa dan kapan</span></div><span class="ar" aria-hidden="true">→</span>
+    <div class="st"><b>Desain</b><span>bentuk dan alur</span></div><span class="ar" aria-hidden="true">→</span>
+    <div class="st"><b>Bangun</b><span>ditulis kodenya</span></div><span class="ar" aria-hidden="true">→</span>
+    <div class="st"><b>Uji</b><span>dicek kualitasnya</span></div><span class="ar" aria-hidden="true">→</span>
+    <div class="st release"><b>Rilis</b><span>dipakai orang</span></div>
+  </div>
+  <p class="loop"><span aria-hidden="true">↺</span> Setelah rilis, masukan pengguna jadi ide perbaikan berikutnya. Siklusnya berulang terus.</p>
+  <div class="prose"><h3 style="font-size:20px">Siapa saja yang terlibat?</h3><p>Dari enam role di playbook ini, hanya satu yang pekerjaan utamanya menulis kode.</p></div>
+  <div class="who" id="whoGrid"></div>
+  <div class="note"><b>Perlu diingat:</b> nama dan pembagian role bisa berbeda di tiap perusahaan. Di tim kecil, satu orang bisa merangkap dua role.</div>
+  <div class="pager"><a class="btn ghost" href="#mulai">Kembali</a><button type="button" class="btn" data-next>Lanjut: kenalan dengan role</button></div>
+</section>
+
+<!-- ============ 2. ROLE ============ -->
+<section class="view" data-view="kenalan-role" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Bagian 2 dari 5</p>
+    <h2 tabindex="-1">Kenalan dengan 6 role</h2>
+    <p class="lede">Ketuk kartu untuk melihat isinya. Nggak perlu dihafal, cukup tangkap gambarannya.</p>
+  </div>
+  <div class="roles" id="roleCards"></div>
+  <div class="note"><b>Catatan:</b> bagian “mungkin kamu nikmati kalau…” adalah gambaran aktivitas, bukan ramalan kepribadian. Siapa pun bisa belajar role mana pun.</div>
+  <div class="pager"><button type="button" class="btn ghost" data-prev>Kembali</button><button type="button" class="btn" data-next>Lanjut: cari role untukmu</button></div>
+</section>
+
+<!-- ============ 3. EXPLORER ============ -->
+<section class="view" data-view="cari-role" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Bagian 3 dari 5</p>
+    <h2 tabindex="-1">Role mana yang ingin kamu eksplorasi?</h2>
+    <p class="lede">Enam pertanyaan singkat tentang aktivitas yang kamu nikmati. Pilih jawaban yang paling mendekati, bukan yang terdengar paling ideal.</p>
+  </div>
+  <div class="note"><b>Ini bukan tes.</b> Hasilnya berupa rekomendasi role untuk mulai kamu eksplorasi, bukan tes psikologi, penilaian kemampuan, atau penentu karier.</div>
+  <form id="quiz" class="q" novalidate></form>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center">
+    <button type="button" class="btn" id="seeResult" disabled>Lihat hasil</button>
+    <span class="answered" id="answered">0 dari 6 dijawab</span>
+  </div>
+  <div class="result" id="result" hidden aria-live="polite"></div>
+  <div class="pager"><button type="button" class="btn ghost" data-prev>Kembali</button><button type="button" class="btn" data-next>Lanjut: simulasi proyek</button></div>
+</section>
+
+<!-- ============ 4. SIMULASI ============ -->
+<section class="view" data-view="simulasi-santap" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Bagian 4 dari 5</p>
+    <h2 tabindex="-1">Simulasi Santap: enam role, satu fitur</h2>
+    <p class="lede">Santap adalah aplikasi pemesanan makanan fiktif. Pelanggannya sering bertanya ke CS, “Pesananku sudah sampai mana?” Tim pun membuat fitur lacak pesanan. Ketuk setiap role untuk melihat perannya.</p>
+  </div>
+  <div class="sim">
+    <div id="cycleWrap"></div>
+    <div class="panel" id="simPanel" aria-live="polite"></div>
+  </div>
+  <div class="iter">
+    <h3>Bukan garis lurus, tapi lingkaran</h3>
+    <p style="font-size:15px; color:var(--ink-2)">Di proyek nyata, pekerjaan sering bolak-balik. Contohnya:</p>
+    <ul>
+      <li><span>QA menemukan bug, developer memperbaikinya, lalu QA menguji ulang.</span></li>
+      <li><span>Kebutuhan ternyata belum jelas, jadi BA bertanya lagi ke PO atau pengguna.</span></li>
+      <li><span>Setelah rilis, masukan pengguna jadi ide untuk putaran berikutnya.</span></li>
+    </ul>
+  </div>
+  <p style="font-size:13.5px; color:var(--ink-2)">Cerita ini fiktif dan disederhanakan. Urutan dan cara kerja tiap tim bisa berbeda.</p>
+  <div class="pager"><button type="button" class="btn ghost" data-prev>Kembali</button><button type="button" class="btn" data-next>Lanjut: langkah berikutnya</button></div>
+</section>
+
+<!-- ============ 5. LANGKAH BERIKUTNYA ============ -->
+<section class="view" data-view="langkah-pertama" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Bagian 5 dari 5</p>
+    <h2 tabindex="-1">Langkah berikutnya</h2>
+    <p class="lede" id="nextLede">Tiga skill dasar untuk tiap role, dan ke mana kamu bisa melangkah setelah ini.</p>
+  </div>
+
+  <div class="prose"><h3 style="font-size:20px">Tiga skill untuk dikenali dulu</h3><p>Pilih role yang ingin kamu lihat. Sisanya bisa menyusul setelah kamu yakin.</p></div>
+  <div class="tabs" id="skillTabs" role="tablist" aria-label="Pilih role"></div>
+  <div class="skills" id="skillList" role="tabpanel"></div>
+
+  <div class="bonus-card">
+    <div><p class="eyebrow">Bonus opsional</p><h3>Tantangan eksplorasi 7 hari</h3><p>Satu aktivitas kecil per hari, 15–30 menit, gratis dan tanpa coding. Cocok kalau kamu ingin mencoba langsung rasanya tiap role. <span id="bonusTxt"></span></p></div>
+    <a class="btn small" href="#tantangan-7-hari">Lihat tantangan</a>
+  </div>
+
+  <div class="prose" style="margin-top:6px"><h3 style="font-size:20px">Mau lanjut belajar bareng?</h3><p id="nextP">Ambil yang sesuai kebutuhanmu saja.</p></div>
+  <div class="cta-grid" id="ctas"></div>
+
+  <div class="finish">
+    <img src="assets/logo-mark.png" alt="" data-logo width="44" height="60">
+    <div>
+      <h3>Selesai berkeliling?</h3>
+      <p>Tandai playbook ini selesai. Kamu tetap bisa kembali ke bagian mana pun kapan saja.</p>
+      <button type="button" class="btn gold" id="finishBtn">Tandai selesai</button>
+    </div>
+  </div>
+  <div class="pager"><button type="button" class="btn ghost" data-prev>Kembali</button><a class="btn ghost" href="#mulai">Ke halaman awal</a></div>
+</section>
+
+<!-- ============ BONUS: TANTANGAN 7 HARI ============ -->
+<section class="view" data-view="tantangan-7-hari" hidden>
+  <div class="view-head">
+    <p class="eyebrow">Bonus opsional</p>
+    <h2 tabindex="-1">Tantangan eksplorasi 7 hari</h2>
+    <p class="lede">Satu aktivitas kecil per hari, gratis dan tanpa coding. Boleh dikerjakan berurutan atau dipilih yang paling menarik saja. Centang setiap hari yang sudah selesai.</p>
+  </div>
+  <div style="display:grid; gap:6px"><div class="meter" aria-hidden="true"><span id="dayMeter"></span></div><span class="answered" id="dayTxt">0 dari 7 hari selesai</span></div>
+  <div class="days" id="days"></div>
+  <div class="pager"><a class="btn ghost" href="#langkah-pertama">Kembali ke Langkah berikutnya</a><a class="btn ghost" href="#mulai">Ke halaman awal</a></div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap reset-row">
+    <span><span id="footBrand">Ngawam Digital</span> · IT Career Explorer</span>
+    <span style="margin-left:auto" id="resetWrap">
+      <button type="button" class="linkbtn" id="resetBtn">Reset progres</button>
+      <span id="resetAsk" hidden>Hapus semua progres dan jawaban? <button type="button" class="linkbtn" id="resetYes">Ya, hapus</button> · <button type="button" class="linkbtn" id="resetNo">Batal</button></span>
+    </span>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   PENGATURAN — edit bagian ini saja untuk mengganti nama brand dan CTA.
+
+   Setiap kartu CTA punya:
+     aktif     : true = tampil, false = disembunyikan
+     utama     : true = kartu disorot (warna gold). Cukup satu.
+     judul     : judul kartu
+     deskripsi : teks singkat di bawah judul
+     tombol    : tulisan di tombol
+     link      : alamat tujuan, contoh "https://...". Kalau dibiarkan ""
+                 tombolnya tampil "Segera hadir" dan tidak bisa diklik.
+     hanyaUntukRole (opsional): kartu hanya tampil kalau hasil kuis
+                 pembaca menyertakan role ini ("qa","ba","pm","po","ux","dev").
+   Urutan kartu di halaman = urutan di daftar ini.
+   ===================================================================== */
+var CONFIG = {
+  brandName: "Ngawam Digital",
+  ctas: [
+    { id: "ebook", aktif: true, utama: true,
+      judul: "Ebook: Berkarier di Project Software Tanpa Latar Belakang IT",
+      deskripsi: "Untuk yang ingin belajar lebih dalam: 12 bab, latihan di setiap bab, simulasi proyek, roadmap 90 hari, template portfolio, dan persiapan interview.",
+      tombol: "Lihat ebook",
+      link: "https://ngawam-digital.myr.id/ebook/berkarier-di-project-software-tanpa-latar-belakang-it" },   // sudah diisi — link halaman pembelian ebook
+
+    { id: "threads", aktif: true,
+      judul: "Ikuti di Threads",
+      deskripsi: "Bacaan ringan seputar dunia kerja IT dan cerita dari lapangan.",
+      tombol: "Ikuti di Threads",
+      link: "https://www.threads.com/@devidkardena" },   // sudah diisi — link profil Threads
+
+    { id: "formMinat", aktif: true,
+      judul: "Isi form minat belajar",
+      deskripsi: "Ceritakan role dan topik yang ingin kamu pelajari, supaya materi berikutnya sesuai kebutuhanmu.",
+      tombol: "Isi form",
+      link: "https://docs.google.com/forms/d/e/1FAIpQLSeRwlYOZ1D2pJDESvmXOQbnyzrcputNpgaMob6kpaUG3r27jA/viewform?usp=sharing&ouid=116341503076583451670" },   // sudah diisi — link Google Form
+
+    { id: "careerClinic", aktif: false,
+      judul: "Career Clinic",
+      deskripsi: "Sesi diskusi kecil tentang langkah awal berkarier di industri software. Jadwal dan formatnya akan diumumkan.",
+      tombol: "Lihat info",
+      link: "" },   // GANTI lalu ubah aktif ke true kalau sudah dibuka
+
+    { id: "baStarterKit", aktif: false, hanyaUntukRole: "ba",
+      judul: "Business Analyst Starter Kit",
+      deskripsi: "Karena BA ada di hasilmu: materi latihan praktik untuk calon Business Analyst.",
+      tombol: "Lihat Starter Kit",
+      link: "" }    // GANTI lalu ubah aktif ke true kalau sudah tersedia
+  ]
+};
+
+/* ===================== KONTEN ===================== */
+var STOPS = [
+  {id:"dunia-it", name:"Dunia IT dalam 2 menit", desc:"Bagaimana aplikasi dibuat dan siapa yang terlibat.", min:2},
+  {id:"kenalan-role", name:"Kenalan dengan 6 role", desc:"Apa kerjanya, contoh hasil kerja, dan perlu coding atau tidak.", min:3},
+  {id:"cari-role", name:"Cari role untuk dieksplorasi", desc:"Enam pertanyaan singkat, lalu 1–3 rekomendasi role untuk dicoba kenali.", min:2},
+  {id:"simulasi-santap", name:"Simulasi Santap", desc:"Lihat keenam role bekerja sama membuat satu fitur.", min:2},
+  {id:"langkah-pertama", name:"Langkah berikutnya", desc:"Tiga skill dasar per role dan ke mana setelah ini.", min:1}
+];
+var BONUS = {id:"tantangan-7-hari", name:"Tantangan eksplorasi 7 hari"};
+
+var ICONS = {
+  qa:'<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  ba:'<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5M8 10.5h5M10.5 8v5"/>',
+  pm:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3M8 17h6"/>',
+  po:'<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  ux:'<path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/>',
+  dev:'<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>'
+};
+
+var ROLES = {
+  qa:{name:"Quality Assurance (QA)", short:"QA", stage:"Uji",
+      one:"Memastikan aplikasi bekerja sesuai harapan sebelum dipakai banyak orang.",
+      days:"Mencoba fitur langkah demi langkah, lalu mencatat hal yang tidak sesuai dengan jelas.",
+      output:"Test case (daftar langkah pengujian) dan bug report (laporan masalah).",
+      code:"Tidak wajib di awal. Akan berguna kalau nanti kamu ingin mendalami automation testing.", codeYes:false,
+      enjoy:"suka mencoba-coba sesuatu dan cepat menyadari hal yang janggal."},
+  ba:{name:"Business Analyst (BA)", short:"BA", stage:"Rencana",
+      one:"Menerjemahkan kebutuhan bisnis jadi penjelasan yang bisa dikerjakan tim.",
+      days:"Bertanya ke pengguna dan pihak bisnis, lalu menggambar alur prosesnya.",
+      output:"User story, flowchart (gambar alur), dan dokumen kebutuhan.",
+      code:"Tidak. Yang penting paham alur sistem secara garis besar.", codeYes:false,
+      enjoy:"suka bertanya “kenapa” dan merapikan hal yang ruwet jadi mudah dipahami."},
+  pm:{name:"Project Manager (PM)", short:"PM", stage:"Semua tahap",
+      one:"Menjaga proyek berjalan sesuai rencana: waktu, orang, dan risiko.",
+      days:"Memimpin meeting rutin, memantau progres, dan membereskan hambatan.",
+      output:"Timeline, laporan status, dan daftar risiko.",
+      code:"Tidak, tapi perlu memahami alur kerja teknis secara garis besar.", codeYes:false,
+      enjoy:"suka mengatur jadwal dan memastikan semua orang tahu harus mengerjakan apa."},
+  po:{name:"Product Owner (PO)", short:"PO", stage:"Ide dan rencana",
+      one:"Menentukan apa yang dikerjakan lebih dulu agar produk paling bermanfaat.",
+      days:"Menyusun urutan prioritas fitur dan berdiskusi dengan pengguna serta pihak bisnis.",
+      output:"Backlog (daftar pekerjaan) yang sudah diurutkan prioritasnya.",
+      code:"Tidak.", codeYes:false,
+      enjoy:"suka menimbang beberapa pilihan dan memikirkan dampaknya ke pengguna."},
+  ux:{name:"UI/UX Designer", short:"UI/UX", stage:"Desain",
+      one:"Merancang tampilan dan alur supaya aplikasi mudah dan nyaman dipakai.",
+      days:"Membuat sketsa dan prototype, lalu mencobanya ke pengguna.",
+      output:"Wireframe (sketsa layar) dan prototype yang bisa diklik.",
+      code:"Tidak wajib.", codeYes:false,
+      enjoy:"peka pada pengalaman orang lain dan senang mengolah tampilan visual."},
+  dev:{name:"Software Developer", short:"Developer", stage:"Bangun",
+      one:"Menulis kode yang membuat aplikasi benar-benar bekerja.",
+      days:"Membangun fitur baru dan memperbaiki bug.",
+      output:"Kode program dan fitur yang berjalan.",
+      code:"Ya. Menulis kode adalah inti pekerjaannya.", codeYes:true,
+      enjoy:"suka memecahkan teka-teki logika dan membangun sesuatu dari nol."}
+};
+var ROLE_ORDER = ["qa","ba","pm","po","ux","dev"];
+
+var QUESTIONS = [
+  {q:"Saat mencoba aplikasi baru, kamu paling sering…", o:[
+    ["Mencari bagian yang error atau terasa janggal","qa"],
+    ["Penasaran kenapa fiturnya dibuat seperti itu","ba"],
+    ["Memperhatikan apakah tampilannya mudah dipahami","ux"],
+    ["Penasaran bagaimana aplikasi itu bekerja di balik layar","dev"]]},
+  {q:"Di kerja kelompok, peran yang paling sering kamu ambil…", o:[
+    ["Bikin jadwal dan mengingatkan deadline","pm"],
+    ["Memutuskan bagian mana yang dikerjakan duluan","po"],
+    ["Mengecek ulang hasil akhir sebelum dikumpulkan","qa"],
+    ["Bertanya apa yang sebenarnya diminta dosen atau klien","ba"]]},
+  {q:"Pekerjaan yang paling bikin kamu puas…", o:[
+    ["Merapikan hal ruwet jadi penjelasan yang mudah dipahami","ba"],
+    ["Melihat rencana berjalan sesuai jadwal","pm"],
+    ["Membuat sesuatu terlihat rapi dan nyaman dipakai","ux"],
+    ["Memecahkan teka-teki logika sampai berhasil","dev"]]},
+  {q:"Ada lima ide bagus, tapi waktunya cuma cukup untuk dua. Kamu…", o:[
+    ["Senang menimbang mana yang paling berdampak","po"],
+    ["Menyusun ulang jadwal supaya tetap realistis","pm"],
+    ["Ingin tahu dulu masalah apa yang mau diselesaikan","ba"],
+    ["Lebih suka langsung mengerjakan salah satunya","dev"]]},
+  {q:"Aktivitas yang paling ingin kamu coba minggu ini…", o:[
+    ["Menulis langkah-langkah untuk menguji sebuah fitur","qa"],
+    ["Menggambar sketsa tampilan aplikasi impianmu","ux"],
+    ["Belajar dasar logika pemrograman","dev"],
+    ["Menyusun daftar prioritas fitur untuk sebuah aplikasi","po"]]},
+  {q:"Di sebuah tim, kamu paling nyaman menjadi orang yang…", o:[
+    ["Menjaga semua orang tahu harus mengerjakan apa","pm"],
+    ["Memastikan kualitas sebelum sesuatu dirilis","qa"],
+    ["Mewakili sudut pandang pengguna","ux"],
+    ["Menentukan arah dan prioritas produk","po"]]}
+];
+
+/* Simulasi Santap: urutan = urutan di lingkaran (PO → BA → UI/UX → Developer → QA → Rilis → kembali ke PO).
+   PM selalu di tengah karena mengoordinasikan semua tahap. */
+var SIM = [
+  {role:"po", act:"Memilih fitur lacak pesanan dikerjakan lebih dulu, karena paling mengurangi pertanyaan ke CS.",
+   out:"Backlog dengan “Lacak pesanan” di urutan teratas", with:"BA dan PM"},
+  {role:"ba", act:"Bertanya ke tim CS dan operasional: status apa saja yang perlu tampil, siapa yang mengubahnya, dan bagaimana kalau pesanan dibatalkan?",
+   out:"User story dan syarat selesai: status Diterima, Disiapkan, Diantar, Selesai", with:"PO, UI/UX, dan developer"},
+  {role:"ux", act:"Merancang layar status pesanan, lalu mencobanya ke beberapa pengguna untuk melihat apakah langsung dipahami.",
+   out:"Rancangan layar status pesanan", mock:true, with:"BA dan developer"},
+  {role:"dev", act:"Membangun tampilan status dan menghubungkannya ke data dari restoran dan kurir.",
+   out:"Fitur yang bisa dicoba di lingkungan uji", with:"UI/UX dan QA"},
+  {role:"qa", act:"Menguji berbagai situasi: status normal, pesanan dibatalkan, sinyal putus. Bug dilaporkan ke developer, lalu diuji ulang setelah diperbaiki.",
+   out:"Test case dan bug report", with:"Developer dan BA"},
+  {role:"pm", act:"Menjaga semuanya tetap jalan: jadwal, hambatan, dan risiko seperti data kurir yang terlambat. Setelah rilis, mengajak tim mengevaluasi hasilnya.",
+   out:"Timeline, laporan status, dan daftar risiko", with:"Semua role"}
+];
+
+var SKILLS = {
+  qa:[["Membayangkan skenario","Dari satu fitur, tulis sebanyak mungkin situasi yang bisa terjadi, termasuk yang tidak biasa."],["Menulis test case","Langkah pengujian, data yang dipakai, dan hasil yang diharapkan."],["Menulis bug report yang jelas","Judul, langkah, hasil, seharusnya, dan bukti screenshot."]],
+  ba:[["Bertanya dan mendengarkan","Menggali kebutuhan yang tidak diucapkan dengan pertanyaan terbuka."],["Menggambar alur proses","Flowchart sederhana di kertas atau aplikasi gratis seperti Draw.io."],["Menulis user story","Sebagai [siapa], saya ingin [apa], agar [manfaatnya]."]],
+  pm:[["Memecah pekerjaan","Ubah satu pekerjaan besar menjadi tugas-tugas kecil yang jelas pemiliknya."],["Menyusun timeline sederhana","Urutan tugas, siapa mengerjakan, dan kapan selesai."],["Menulis laporan status","Progres, hambatan, dan langkah berikutnya, cukup dalam beberapa baris."]],
+  po:[["Memahami masalah pengguna","Bedakan apa yang diminta pengguna dengan apa yang sebenarnya mereka butuhkan."],["Menyusun prioritas","Urutkan ide berdasarkan dampak dan usaha yang dibutuhkan."],["Menjelaskan alasan keputusan","Sampaikan kenapa sesuatu dikerjakan dulu, dan apa yang ditunda."]],
+  ux:[["Mengamati pengguna","Perhatikan bagian mana orang bingung saat memakai aplikasi."],["Membuat sketsa dan wireframe","Mulai dari kertas sebelum memakai aplikasi desain."],["Mengenal Figma","Aplikasi desain yang banyak dipakai tim produk, ada versi gratisnya."]],
+  dev:[["Logika dasar pemrograman","Urutan langkah, kondisi (jika… maka…), dan perulangan."],["Satu bahasa untuk pemula","Misalnya HTML dan CSS untuk web, lalu lanjut ke JavaScript."],["Membaca pesan error","Belajar mencari tahu penyebab masalah, bagian yang paling sering dilakukan developer."]]
+};
+
+var DAYS = [
+  {t:"Pilih satu aplikasi", g:"Punya “bahan latihan” untuk seminggu.", a:"Pilih satu aplikasi yang sering kamu pakai. Tulis tiga hal yang pernah bikin kamu kesal saat memakainya.", m:15},
+  {t:"Jadi QA sehari", g:"Merasakan cara kerja QA.", a:"Coba satu fitur di aplikasi itu, misalnya pencarian. Catat satu hal janggal dengan format: judul, langkah, hasil, dan seharusnya.", m:30},
+  {t:"Jadi BA sehari", g:"Merasakan cara kerja BA.", a:"Tanya dua teman tentang aplikasi yang sama: apa yang paling mereka butuhkan? Tulis satu user story dari jawabannya.", m:30},
+  {t:"Jadi UI/UX sehari", g:"Merasakan cara kerja desainer.", a:"Sketsa di kertas versi perbaikan dari satu layar yang menurutmu membingungkan.", m:30},
+  {t:"Jadi PO dan PM sehari", g:"Merasakan cara menentukan prioritas dan rencana.", a:"Tulis lima ide perbaikan, urutkan dari yang paling penting, lalu buat rencana dua minggu untuk ide nomor satu.", m:30},
+  {t:"Intip lowongan kerja", g:"Melihat kebutuhan dunia nyata.", a:"Baca tiga lowongan untuk role yang paling menarik buatmu. Tandai skill yang muncul berulang kali.", m:30},
+  {t:"Refleksi", g:"Menentukan langkah berikutnya.", a:"Dari hari 2 sampai 5, mana yang paling kamu nikmati? Tulis tiga kalimat alasannya, lalu satu hal yang ingin kamu pelajari bulan ini.", m:15}
+];
+
+/* ===================== STATE ===================== */
+var KEY = "ngawam-it-explorer-v1";
+var state = {done:[], answers:{}, top:[], days:[], skillTab:null, simStep:0, simSeen:[0]};
+function load(){
+  try{ var raw = localStorage.getItem(KEY); if(raw){ var s = JSON.parse(raw); for(var k in state){ if(s[k]!==undefined) state[k]=s[k]; } } }catch(e){}
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+var $ = function(s,r){ return (r||document).querySelector(s); };
+var $$ = function(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); };
+function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];}); }
+function icon(k){ return '<span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24">'+ICONS[k]+'</svg></span>'; }
+
+/* ===================== RENDER ===================== */
+function renderStatic(){
+  $("#brandName").textContent = CONFIG.brandName; $("#footBrand").textContent = CONFIG.brandName;
+  wireLogos();
+  // landing preview
+  $("#preview").innerHTML = STOPS.map(function(s,i){
+    return '<a class="stop-row" data-stop="'+s.id+'" href="#'+s.id+'"><span class="n">'+(i+1)+'</span><span><h3>'+s.name+'</h3><p>'+s.desc+'</p></span><span class="min">'+s.min+' mnt</span></a>';
+  }).join("");
+  // who grid
+  $("#whoGrid").innerHTML = ROLE_ORDER.map(function(k){ var r=ROLES[k];
+    return '<div><b>'+r.short+'</b>'+r.stage+'<br><span class="code">'+(r.codeYes?"Menulis kode":"Tidak wajib coding")+'</span></div>'; }).join("");
+  // role cards
+  $("#roleCards").innerHTML = ROLE_ORDER.map(function(k){ var r=ROLES[k];
+    return '<details class="role" id="role-'+k+'"><summary>'+icon(k)+'<span><h3>'+r.name+'</h3><p class="one">'+r.one+'</p></span><svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>'+
+      '<div class="body"><dl class="kv"><dt>Sehari-hari</dt><dd>'+r.days+'</dd></dl>'+
+      '<dl class="kv"><dt>Contoh hasil kerja</dt><dd>'+r.output+'</dd></dl>'+
+      '<dl class="kv"><dt>Harus bisa coding?</dt><dd><span class="pill'+(r.codeYes?" yes":"")+'">'+(r.codeYes?"Ya":"Tidak wajib")+'</span> '+r.code+'</dd></dl>'+
+      '<dl class="kv"><dt>Mungkin kamu nikmati kalau</dt><dd>kamu '+r.enjoy+'</dd></dl></div></details>'; }).join("");
+  // quiz
+  $("#quiz").innerHTML = QUESTIONS.map(function(q,i){
+    return '<fieldset class="q" style="margin-bottom:18px"><legend><span class="qn" style="display:block">Pertanyaan '+(i+1)+' dari '+QUESTIONS.length+'</span>'+q.q+'</legend><div class="opts">'+
+      q.o.map(function(o,j){ var id="q"+i+"o"+j;
+        return '<label class="opt" for="'+id+'"><input type="radio" id="'+id+'" name="q'+i+'" value="'+j+'"><span class="dot" aria-hidden="true"></span><span>'+o[0]+'</span></label>'; }).join("")+
+      '</div></fieldset>'; }).join("");
+  // collaboration cycle
+  $("#cycleWrap").innerHTML = cycleSVG();
+  // skill tabs
+  $("#skillTabs").innerHTML = ROLE_ORDER.map(function(k){
+    return '<button type="button" role="tab" id="tab-'+k+'" data-role="'+k+'" aria-selected="false">'+ROLES[k].short+'</button>'; }).join("");
+  // days
+  $("#days").innerHTML = DAYS.map(function(d,i){ var id="day"+i;
+    return '<label class="day" for="'+id+'"><input type="checkbox" id="'+id+'" data-day="'+i+'"><span><h4><small>Hari '+(i+1)+'</small>'+d.t+'</h4><p class="goal">Tujuan: '+d.g+'</p><p>'+d.a+'</p></span><span class="min">± '+d.m+' mnt</span></label>'; }).join("");
+}
+
+function ctaBtn(link, label){
+  return link ? '<a class="btn small" href="'+esc(link)+'" target="_blank" rel="noopener">'+label+'</a>'
+              : '<button type="button" class="btn small" disabled>Segera hadir</button>';
+}
+function renderCTAs(){
+  var out = CONFIG.ctas.filter(function(c){
+    if (!c.aktif) return false;
+    if (c.hanyaUntukRole && state.top.indexOf(c.hanyaUntukRole)<0) return false;
+    return true;
+  }).map(function(c){
+    return '<div class="cta'+(c.utama?' main':'')+'" data-cta="'+esc(c.id)+'"><h4>'+esc(c.judul)+'</h4><p>'+esc(c.deskripsi)+'</p>'+ctaBtn(c.link, esc(c.tombol))+'</div>';
+  });
+  $("#ctas").innerHTML = out.join("");
+}
+
+/* Logo: kalau file gambar tidak ditemukan, tampilkan teks cadangan */
+function wireLogos(){
+  $$("img[data-logo]").forEach(function(img){
+    function fail(){ img.hidden = true; var f = img.parentNode.querySelector("[data-logo-fallback]"); if (f) f.hidden = false; }
+    if (img.complete && img.naturalWidth===0) fail(); else img.addEventListener("error", fail);
+  });
+}
+
+/* ===================== EXPLORER ===================== */
+function computeResult(ans){
+  var score={}, reasons={}, first={};
+  ROLE_ORDER.forEach(function(k){ score[k]=0; reasons[k]=[]; });
+  QUESTIONS.forEach(function(q,i){
+    var j = ans[i]; if (j===undefined || j===null) return;
+    var o = q.o[j], k = o[1];
+    score[k]++; reasons[k].push(o[0]); if (first[k]===undefined) first[k]=i;
+  });
+  var ranked = ROLE_ORDER.filter(function(k){return score[k]>0;}).sort(function(a,b){
+    return score[b]-score[a] || first[a]-first[b];
+  });
+  var max = ranked.length ? score[ranked[0]] : 0;
+  var picks = ranked.filter(function(k){ return score[k]===max || (max>=2 && score[k]===max-1); }).slice(0,3);
+  return {score:score, reasons:reasons, picks:picks, max:max};
+}
+function answeredCount(){ return Object.keys(state.answers).filter(function(k){return state.answers[k]!==null;}).length; }
+function updateQuizUI(){
+  var n = answeredCount();
+  $("#answered").textContent = n+" dari "+QUESTIONS.length+" dijawab";
+  $("#seeResult").disabled = n < QUESTIONS.length;
+}
+function showResult(fromUser){
+  var r = computeResult(state.answers);
+  state.top = r.picks; markDone("cari-role"); save();
+  var head = r.max===1
+    ? "<p>Jawabanmu tersebar merata, jadi ketiga role ini sama-sama layak kamu coba kenali lebih jauh.</p>"
+    : "<p>Berdasarkan aktivitas yang kamu pilih, role ini bisa kamu kenali lebih dulu.</p>";
+  var html = '<h3>Rekomendasi role untuk kamu eksplorasi</h3>'+head + r.picks.map(function(k){ var ro=ROLES[k];
+    return '<div class="pick">'+icon(k)+'<div><h4>'+ro.name+' <span class="sc">'+r.score[k]+' dari '+QUESTIONS.length+' jawaban</span></h4>'+
+      '<ul>'+r.reasons[k].map(function(t){return "<li>Kamu memilih: “"+t+"”</li>";}).join("")+'</ul>'+
+      '<button type="button" class="linkbtn" data-open-role="'+k+'">Baca lagi kartu '+ro.short+'</button></div></div>'; }).join("")+
+    '<div class="note"><b>Ingat, ini rekomendasi, bukan tes psikologi atau penentu karier.</b> Hasilnya hanya titik mulai untuk memilih role yang ingin kamu kenali lebih dulu. Minat bisa berubah setelah kamu mencoba, dan itu wajar.</div>'+
+    '<div><button type="button" class="btn ghost small" id="retake">Ulangi pertanyaan</button></div>';
+  var box = $("#result"); box.innerHTML = html; box.hidden = false;
+  $("#retake").addEventListener("click", function(){
+    state.answers = {}; state.top = []; save();
+    $$("#quiz input").forEach(function(i){ i.checked=false; });
+    box.hidden = true; updateQuizUI(); renderCTAs(); updateNextIntro();
+    $("#quiz legend").scrollIntoView({behavior:"smooth", block:"center"});
+  });
+  $$("[data-open-role]", box).forEach(function(b){ b.addEventListener("click", function(){ openRole(b.getAttribute("data-open-role")); }); });
+  renderCTAs(); updateNextIntro(); if (fromUser) selectSkill(state.top[0]||"qa");
+}
+function openRole(k){
+  location.hash = "#kenalan-role";
+  setTimeout(function(){ var d = document.getElementById("role-"+k); if(d){ d.open = true; d.scrollIntoView({behavior:"smooth", block:"center"}); } }, 60);
+}
+
+/* ===================== SIMULASI ===================== */
+function cycleSVG(){
+  var C=190, Rr=138, NR=34, order=["po","ba","ux","dev","qa","rilis"];
+  function pt(deg, r){ var a=deg*Math.PI/180; return [C+r*Math.cos(a), C+r*Math.sin(a)]; }
+  var ang = order.map(function(_,i){ return -90+i*60; });
+  var g = '<svg class="cycle" viewBox="-14 -14 408 408" role="group" aria-label="Lingkaran kolaborasi tim Santap. Pilih role untuk melihat perannya.">'+
+    '<defs><linearGradient id="ngGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13A8B6"/><stop offset="1" stop-color="#22C59A"/></linearGradient>'+
+    '<marker id="ngArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--teal)"/></marker></defs>';
+  // arrows between nodes
+  ang.forEach(function(a,i){
+    var off=19, p1=pt(a+off,Rr), p2=pt(a+60-off,Rr);
+    g += '<path class="arc" marker-end="url(#ngArrow)" d="M'+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+' A'+Rr+' '+Rr+' 0 0 1 '+p2[0].toFixed(1)+' '+p2[1].toFixed(1)+'"/>';
+  });
+  var lp = pt(240, Rr+26);
+  g += '<text class="arc-lbl" x="'+lp[0].toFixed(1)+'" y="'+lp[1].toFixed(1)+'" text-anchor="end">masukan pengguna</text>';
+  // spokes from PM
+  ang.slice(0,5).forEach(function(a){ var p1=pt(a,NR+6), p2=pt(a,Rr-NR-4); g += '<line class="spoke" x1="'+p1[0].toFixed(1)+'" y1="'+p1[1].toFixed(1)+'" x2="'+p2[0].toFixed(1)+'" y2="'+p2[1].toFixed(1)+'"/>'; });
+  function node(k, x, y, r){
+    var i = -1; SIM.forEach(function(s,j){ if(s.role===k) i=j; });
+    if (k==="rilis") return '<g class="node user" aria-hidden="true"><circle cx="'+x+'" cy="'+y+'" r="'+r+'"/><text x="'+x+'" y="'+(y+4.5)+'">Rilis</text></g>';
+    return '<g class="node btn-node'+(k==="pm"?" pm":"")+'" data-sim="'+i+'" tabindex="0" role="button" aria-label="'+esc(ROLES[k].name)+'"><circle cx="'+x+'" cy="'+y+'" r="'+r+'"/><text x="'+x+'" y="'+(y+4.5)+'">'+ROLES[k].short+'</text></g>';
+  }
+  order.forEach(function(k,i){ var p=pt(ang[i],Rr); g += node(k, Math.round(p[0]*10)/10, Math.round(p[1]*10)/10, NR); });
+  g += node("pm", C, C, NR+6);
+  return g+'</svg>';
+}
+function showSim(i){
+  if (!(i>=0 && i<SIM.length)) i = 0;
+  state.simStep = i; if (state.simSeen.indexOf(i)<0) state.simSeen.push(i); save();
+  var s = SIM[i], ro = ROLES[s.role];
+  var mock = s.mock ? '<div><div class="mock-line" aria-hidden="true"><b></b><i></i><b></b><i></i><b></b><i class="off"></i><b class="off"></b></div><div class="mock"><span>Diterima</span><span>Disiapkan</span><span>Diantar</span><span>Selesai</span></div></div>' : '';
+  $("#simPanel").innerHTML =
+    '<span class="role-tag">'+icon(s.role).replace('class="ic"','class="ic" style="width:22px;height:22px;background:none"')+esc(ro.name)+'</span>'+
+    '<p>'+s.act+'</p>'+
+    '<div class="artifact"><div class="lbl">Contoh hasil kerja</div><ul><li>'+s.out+'</li></ul>'+mock+'</div>'+
+    '<div class="pm-lane"><b>Sering bolak-balik dengan:</b><span>'+s.with+'</span></div>'+
+    '<div class="sim-nav"><button type="button" class="btn ghost small" id="simPrev"'+(i===0?" disabled":"")+'>Role sebelumnya</button>'+
+    '<span class="answered" id="simCount">'+state.simSeen.length+' dari '+SIM.length+' role dilihat</span>'+
+    '<button type="button" class="btn small" id="simNext"'+(i===SIM.length-1?" disabled":"")+'>Role berikutnya</button></div>';
+  $$("#cycleWrap .btn-node").forEach(function(n){
+    var j = +n.getAttribute("data-sim");
+    n.classList.toggle("sel", j===i); n.setAttribute("aria-pressed", j===i?"true":"false");
+    n.classList.toggle("seen", state.simSeen.indexOf(j)>-1);
+  });
+  $("#simPrev").addEventListener("click", function(){ showSim(i-1); });
+  $("#simNext").addEventListener("click", function(){ showSim(i+1); });
+}
+
+/* ===================== LANGKAH PERTAMA ===================== */
+function selectSkill(k){
+  state.skillTab = k; save();
+  $$("#skillTabs button").forEach(function(b){ var on = b.getAttribute("data-role")===k; b.setAttribute("aria-selected", on?"true":"false"); b.tabIndex = on?0:-1; });
+  $("#skillList").setAttribute("aria-labelledby","tab-"+k);
+  $("#skillList").innerHTML = SKILLS[k].map(function(s){ return '<div class="skill"><span><b>'+s[0]+'</b><span>'+s[1]+'</span></span></div>'; }).join("");
+}
+function updateDays(){
+  var n = state.days.length;
+  $("#dayTxt").textContent = n+" dari 7 hari selesai";
+  $("#dayMeter").style.width = (n/7*100)+"%";
+  $("#bonusTxt").textContent = n ? "Progresmu: "+n+" dari 7 hari." : "";
+}
+var FOCUS_DAY = {qa:"Hari 2", ba:"Hari 3", ux:"Hari 4", po:"Hari 5", pm:"Hari 5"};
+function updateNextIntro(){
+  var p = $("#nextLede");
+  if (state.top.length){
+    var k = state.top[0], names = state.top.map(function(x){return ROLES[x].short;}).join(", ");
+    var tip = k==="dev" ? "Tantangan bonus 7 hari tidak memakai coding, jadi untuk Developer lanjutkan dengan belajar dasar logika pemrograman."
+                        : "Kalau ingin mencoba langsung, mulai dari "+FOCUS_DAY[k]+" di tantangan bonus.";
+    p.textContent = "Rekomendasi dari kuis tadi: "+names+". Skill di bawah sudah dibuka untuk "+ROLES[k].short+". "+tip;
+  } else {
+    p.textContent = "Tiga skill dasar untuk tiap role, dan ke mana kamu bisa melangkah setelah ini.";
+  }
+}
+
+/* ===================== NAV & PROGRESS ===================== */
+function markDone(id){ if (state.done.indexOf(id)<0){ state.done.push(id); save(); } renderProgress(); }
+function currentId(){ var h = location.hash.replace("#",""); return (h==="mulai"||h===BONUS.id||STOPS.some(function(s){return s.id===h;})) ? (h||"mulai") : "mulai"; }
+function renderProgress(){
+  var cur = currentId(), n = state.done.length;
+  $("#progTxt").textContent = n+" dari "+STOPS.length+" bagian";
+  var html = "";
+  STOPS.forEach(function(s,i){
+    var d = state.done.indexOf(s.id)>-1;
+    if (i>0) html += '<i class="'+(d?"on":"")+'"></i>';
+    html += '<b class="'+(d?"done":"")+(s.id===cur?" here":"")+'" title="'+s.name+'"></b>';
+  });
+  $("#route").innerHTML = html;
+  $("#menu").innerHTML = '<a href="#mulai" class="'+(cur==="mulai"?"cur":"")+'"><span class="n">↖</span>Halaman awal</a><hr>'+
+    STOPS.map(function(s,i){ var d = state.done.indexOf(s.id)>-1;
+      return '<a href="#'+s.id+'" class="'+(d?"done ":"")+(s.id===cur?"cur":"")+'"'+(s.id===cur?' aria-current="page"':'')+'><span class="n">'+(d?"✓":(i+1))+'</span>'+s.name+'</a>'; }).join("")+
+    '<hr><a href="#'+BONUS.id+'" class="'+(cur===BONUS.id?"cur":"")+'"'+(cur===BONUS.id?' aria-current="page"':'')+'><span class="n">★</span>Bonus: tantangan 7 hari'+(state.days.length?' ('+state.days.length+'/7)':'')+'</a>';
+  $$("#preview .stop-row").forEach(function(a){ a.classList.toggle("done", state.done.indexOf(a.getAttribute("data-stop"))>-1); });
+  var next = STOPS.filter(function(s){return state.done.indexOf(s.id)<0;})[0];
+  var resume = $("#resumeBtn"), start = $("#startBtn");
+  if (n>0){
+    resume.hidden = false; resume.href = "#"+(next?next.id:STOPS[0].id);
+    resume.textContent = next ? "Lanjutkan: "+next.name : "Semua bagian sudah selesai";
+    start.textContent = "Buka bagian 1"; start.href = "#"+STOPS[0].id;
+  } else { resume.hidden = true; start.textContent = "Mulai Eksplorasi"; }
+  $("#finishBtn").textContent = state.done.indexOf("langkah-pertama")>-1 ? "Sudah ditandai selesai ✓" : "Tandai selesai";
+}
+function route(){
+  var id = currentId();
+  $$("[data-view]").forEach(function(v){ v.hidden = v.getAttribute("data-view")!==id; });
+  $("main").hidden = id==="mulai";
+  $("#menu").hidden = true; $("#menuBtn").setAttribute("aria-expanded","false");
+  renderProgress();
+  window.scrollTo(0,0);
+  var h = $('[data-view="'+id+'"] h2'); if (h) { try{ h.focus({preventScroll:true}); }catch(e){} }
+  document.title = id==="mulai" ? "IT Career Explorer" : (id===BONUS.id ? BONUS.name : STOPS.filter(function(s){return s.id===id;})[0].name)+" · IT Career Explorer";
+}
+function go(delta){
+  var id = currentId(), i = STOPS.map(function(s){return s.id;}).indexOf(id);
+  if (delta>0 && id!=="cari-role") markDone(id);
+  var j = i+delta;
+  location.hash = j<0 ? "#mulai" : "#"+STOPS[Math.min(j,STOPS.length-1)].id;
+}
+
+/* ===================== WIRING ===================== */
+function wire(){
+  $$("[data-next]").forEach(function(b){ b.addEventListener("click", function(){ go(1); }); });
+  $$("[data-prev]").forEach(function(b){ b.addEventListener("click", function(){ go(-1); }); });
+  $("#menuBtn").addEventListener("click", function(){ var m=$("#menu"); m.hidden=!m.hidden; this.setAttribute("aria-expanded", m.hidden?"false":"true"); });
+  document.addEventListener("click", function(e){ if(!e.target.closest("#menu") && !e.target.closest("#menuBtn")){ $("#menu").hidden=true; $("#menuBtn").setAttribute("aria-expanded","false"); } });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ $("#menu").hidden=true; $("#menuBtn").setAttribute("aria-expanded","false"); } });
+  $("#quiz").addEventListener("change", function(e){
+    var m = e.target.name.match(/^q(\d+)$/); if(!m) return;
+    state.answers[m[1]] = +e.target.value; save(); updateQuizUI();
+    if (!$("#result").hidden) showResult(true);
+  });
+  $("#quiz").addEventListener("submit", function(e){ e.preventDefault(); });
+  $("#seeResult").addEventListener("click", function(){ showResult(true); $("#result").scrollIntoView({behavior:"smooth", block:"start"}); });
+  $("#cycleWrap").addEventListener("click", function(e){ var n=e.target.closest(".btn-node"); if(n) showSim(+n.getAttribute("data-sim")); });
+  $("#cycleWrap").addEventListener("keydown", function(e){
+    var n=e.target.closest(".btn-node"); if(!n) return;
+    if (e.key==="Enter" || e.key===" "){ e.preventDefault(); showSim(+n.getAttribute("data-sim")); }
+  });
+  $("#skillTabs").addEventListener("click", function(e){ var b=e.target.closest("button"); if(b) selectSkill(b.getAttribute("data-role")); });
+  $("#skillTabs").addEventListener("keydown", function(e){
+    if (e.key!=="ArrowRight" && e.key!=="ArrowLeft") return;
+    var i = ROLE_ORDER.indexOf(state.skillTab), j = (i + (e.key==="ArrowRight"?1:-1) + ROLE_ORDER.length) % ROLE_ORDER.length;
+    selectSkill(ROLE_ORDER[j]); $("#tab-"+ROLE_ORDER[j]).focus();
+  });
+  $("#days").addEventListener("change", function(e){
+    var d = +e.target.getAttribute("data-day");
+    state.days = state.days.filter(function(x){return x!==d;}); if (e.target.checked) state.days.push(d);
+    save(); updateDays(); renderProgress();
+  });
+  $("#finishBtn").addEventListener("click", function(){ markDone("langkah-pertama"); });
+  $("#resetBtn").addEventListener("click", function(){ $("#resetBtn").hidden=true; $("#resetAsk").hidden=false; });
+  $("#resetNo").addEventListener("click", function(){ $("#resetBtn").hidden=false; $("#resetAsk").hidden=true; });
+  $("#resetYes").addEventListener("click", function(){
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    state = {done:[], answers:{}, top:[], days:[], skillTab:null, simStep:0, simSeen:[0]};
+    restore(); $("#resetBtn").hidden=false; $("#resetAsk").hidden=true; location.hash="#mulai"; route();
+  });
+  window.addEventListener("hashchange", route);
+}
+function restore(){
+  $$("#quiz input").forEach(function(i){ var m=i.name.match(/^q(\d+)$/); i.checked = state.answers[m[1]]===+i.value; });
+  updateQuizUI();
+  if (answeredCount()===QUESTIONS.length && state.top.length) showResult(); else $("#result").hidden = true;
+  $$("#days input").forEach(function(i){ i.checked = state.days.indexOf(+i.getAttribute("data-day"))>-1; });
+  updateDays();
+  state.simSeen = (state.simSeen||[]).filter(function(x){ return x>=0 && x<SIM.length; });
+  showSim(state.simStep||0);
+  selectSkill(state.skillTab || state.top[0] || "qa");
+  renderCTAs(); updateNextIntro(); renderProgress();
+}
+
+load(); renderStatic(); wire(); restore(); route();
+</script>
+</body>
+</html>
